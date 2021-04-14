@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="action_print_report_product_supply" model="ir.actions.report">
+        <field name="name">Product Supply Report</field>
+        <field name="model">product.supply</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">product_supply.report_product_supply</field>
+        <field name="report_file">product_supply.report_product_supply</field>
+        <field name="print_report_name">'Product Supply Report'</field>
+        <field name="binding_model_id" ref="model_product_supply"/>
+        <field name="binding_type">report</field>
+    </record>
+  </data>
+</odoo>

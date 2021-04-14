@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_ii,mrp.ii,model_mrp_ii,stock.group_stock_user,1,1,1,1
+access_bill_material_ii,bill.material.ii,model_bill_material_ii,stock.group_stock_user,1,1,1,1
+access_bill_material_ii_sale,bill.material.ii.sale,model_bill_material_ii_sale,stock.group_stock_user,1,1,1,1
+access_bill_material_ii_purchase,bill.material.ii.purchase,model_bill_material_ii_purchase,stock.group_stock_user,1,1,1,1

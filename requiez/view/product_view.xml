@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_archive_form_view" model="ir.ui.view">
+        <field name="name">product.template.archive.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+          <xpath expr="//group[@name='group_general']/field[@name='active']" position="replace"/>
+          <div class="oe_button_box" name="button_box">
+              <button name="toggle_active" string="Active"  type="object" class="oe_stat_button" icon="fa-archive" groups="requiez.group_archive">
+                  <field name="active" sequence="100" widget="boolean_button" options='{"terminology": "archive"}'/>
+              </button>
+          </div>
+        </field>
+    </record>
+
+</odoo>

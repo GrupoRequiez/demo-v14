@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template id="report_delivery_document_observation" inherit_id="stock.report_delivery_document">
+    <xpath expr="//table/thead/tr" position="inside">
+      <th name="th_sm_observation"><strong>Observation</strong></th>
+    </xpath>
+    <xpath expr="//table/tbody/tr" position="inside">
+      <td>
+        <span t-field="move.sale_line_observation"/>
+      </td>
+    </xpath>
+    <xpath expr="//table[2]/thead/tr" position="inside">
+        <th name="th_sml_observation"><strong>Observation</strong></th>
+    </xpath>
+
+    <!-- <xpath expr="//table[2]/tbody/t[2]" position="repl">
+      <td>
+        <span t-field="bo_line.move_id.sale_line_observation"></span>
+      </td>
+    </xpath> -->
+    <xpath expr="//t[@name='partner_header']" position="replace">
+      <div t-if="o.partner_id" name="partner_header">
+        <div t-field="o.partner_id" t-options="{'widget': 'contact', 'fields': ['address', 'name', 'phone'], 'no_marker': True}"/>
+      </div>
+    </xpath>
+  </template>
+
+
+  <template id="stock_report_delivery_has_serial_move_line_observation" inherit_id="stock.stock_report_delivery_has_serial_move_line">
+    <xpath expr="//td[@name='move_line_lot_qty_done']" position="inside">
+        <span>GFC1</span>
+        <!-- <span t-field="move_line.move_id.sale_line_observation"></span> -->
+    </xpath>
+  </template>
+
+  <template id="stock_report_delivery_aggregated_move_lines_observations" inherit_id="stock.stock_report_delivery_aggregated_move_lines">
+    <xpath expr="//tr" position="inside">
+      <td>
+        <!-- <span>GFC2</span> -->
+        <span t-esc="aggregated_lines[line]['sale_line_observation']"/>
+      </td>
+    </xpath>
+  </template>
+</odoo>

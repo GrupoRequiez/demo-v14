@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <data>
+    <record id="print_sale_commission" model="ir.actions.report">
+        <field name="print_report_name">'Seller Commission Report'</field>
+        <field name="name">Seller Commission Report</field>
+        <field name="model">sale.commission</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sale_commission.sale_commission_report_template</field>
+        <field name="report_file">sale_commission.sale_commission_report_template</field>
+        <field name="print_report_name">'Sale Commissions'</field>
+        <field name="binding_model_id" ref="model_sale_commission"/>
+        <field name="binding_type">report</field>
+    </record>
+  </data>
+</odoo>

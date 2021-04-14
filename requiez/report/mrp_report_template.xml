@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="mrp_report_document">
+    <t t-set="docs" t-value="docs.with_context({'lang':user.partner_id.lang})"/>
+    <t t-call="web.external_layout">
+      <div class="page" style="font-size:16px;">
+        <h6>
+          <strong>WORK ORDER</strong>
+        </h6>
+        <table class="table table-condensed">
+          <thead>
+            <tr style="text-align:center; font-size:10px;">
+              <th>Production Order</th>
+              <th class="text-center">Product Code</th>
+              <th class="text-center">Product</th>
+              <th class="text-center">Observation</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Customer</th>
+              <th class="text-center">Current Date</th>
+              <th class="text-center">Priority</th>
+              <th class="text-center">Order</th>
+              <th class="text-center">QR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <t t-foreach="docs.sorted(key=lambda x: x.type_priority)" t-as="o">
+              <tr style="text-align:center; font-size:10px;">
+                <td>
+                  <strong><span t-field="o.name"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.product_id.default_code"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.product_id.name"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.sale_line_observation"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.product_qty"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.partner_id.name"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.date_planned_start"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.sale_type_id"/></strong>
+                </td>
+                <td class="text-center">
+                  <strong><span t-field="o.order_classification"/></strong>
+                </td>
+                <td class="text-center">
+                  <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.name, 40, 40)"/>
+                </td>
+              </tr>
+            </t>
+          </tbody>
+        </table>
+      </div>
+    </t>
+  </template>
+  <template id="mrp_drall_report2">
+    <t t-call="web.html_container">
+      <t t-call="requiez.mrp_report_document" t-lang="user.partner_id.lang"/>
+    </t>
+  </template>
+</odoo>

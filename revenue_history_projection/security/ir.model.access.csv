@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_revenue_history_projection,access_revenue_history_projection,model_revenue_history_projection,account.group_account_user,1,1,1,1
+access_revenue_history_projection_line,access_revenue_history_projection_line,model_revenue_history_projection_line,account.group_account_user,1,1,1,1
