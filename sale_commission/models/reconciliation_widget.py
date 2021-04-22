@@ -31,6 +31,6 @@ class AccountReconciliation(models.AbstractModel):
                 'move_id': line.move_id.id,
                 'move_line_id': line.id,
                 'payment_amount': payment_amount,
-                'date': fields.Date.today(),
+                'date': fields.Datetime.now()
             })
         return res

@@ -13,7 +13,7 @@ class AccountAssociation(models.Model):
     move_line_id = fields.Many2one(
         'account.move.line', ondelete='cascade',
         help="Move where the payment was registered")
-    date = fields.Date(
+    date = fields.Datetime(
         help="Date where the payment was registered in the system by the user")
     payment_amount = fields.Float(
         readonly=True, store=True,

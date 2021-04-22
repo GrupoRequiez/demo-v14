@@ -16,7 +16,7 @@ class AccountMove(models.Model):
                 'move_id': apr_id.debit_move_id.move_id.id,
                 'move_line_id': apr_id.debit_move_id.id,
                 'payment_amount': apr_id.amount,
-                'date': fields.Date.today()
+                'date': fields.Datetime.now()
             })
         return res
 
