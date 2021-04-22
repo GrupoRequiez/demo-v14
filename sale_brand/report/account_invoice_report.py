@@ -29,8 +29,6 @@ class AccountInvoiceReport(models.Model):
     _name = "account.invoice.report"
     _inherit = 'account.invoice.report'
 
-    brand = fields.Char(string="Brand", readonly=True)
-
     def _from(self):
         from_str = super(AccountInvoiceReport, self)._from()
         from_str += """
