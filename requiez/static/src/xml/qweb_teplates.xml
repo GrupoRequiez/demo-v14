@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates >
+
+  <t t-extend="mrp_mps_production_schedule">
+      <t t-jquery="tr[class*='bg-light']" t-operation="after">
+        <tr name="incoming_product">
+            <th scope="row" data-toggle="tooltip" data-placement="bottom" title="The incoming product in Purchase Orders.">
+                + Incoming Product
+            </th>
+            <th/>
+            <t t-foreach="productionSchedule.forecast_ids" t-as="forecast">
+                <th t-attf-class="text-right pr-4 {{forecast.incoming_product}}">
+                    <t t-esc="formatFloat(forecast.incoming_product, false, {'digits': [false, productionSchedule.precision_digits]})"/>
+                </th>
+            </t>
+        </tr>
+        <tr name="product_compromise">
+            <th scope="row" data-toggle="tooltip" data-placement="bottom" title="The product compromise to fulfill the needs in components of the Manufacturing Orders.">
+                - Product compromise
+            </th>
+            <th/>
+            <t t-foreach="productionSchedule.forecast_ids" t-as="forecast">
+                <th t-attf-class="text-right pr-4 {{forecast.product_compromise_qty}}">
+                    <t t-esc="formatFloat(forecast.product_compromise_qty, false, {'digits': [false, productionSchedule.precision_digits]})"/>
+                </th>
+            </t>
+        </tr>
+        <tr name="outgoing_product">
+            <th scope="row" data-toggle="tooltip" data-placement="bottom" title="The outgoing product.">
+                - Outgoing product
+            </th>
+            <th/>
+            <t t-foreach="productionSchedule.forecast_ids" t-as="forecast">
+                <th t-attf-class="text-right pr-4 {{forecast.product_reserve_qty}}">
+                  <!-- t-attf-class="text-right pr-4 {{forecast.product_reserve_qty == 0 and 'text-muted' or ''}}" -->
+                    <t t-esc="formatFloat(forecast.product_reserve_qty, false, {'digits': [false, productionSchedule.precision_digits]})"/>
+                </th>
+            </t>
+        </tr>
+      </t>
+      <t t-jquery="tr[name*='demand_forecast']" t-operation="after">
+        <tr name="product_incomming_forecast">
+            <th scope="row" data-toggle="tooltip" data-placement="bottom" title="The incomming forecast product.">
+              + Product Incomming forecast
+            </th>
+            <th/>
+            <t t-foreach="productionSchedule.forecast_ids" t-as="forecast">
+                <th t-attf-class="text-right pr-4 {{forecast.product_compromise == 0 and 'text-muted' or ''}}">
+                    <t t-esc="formatFloat(forecast.product_compromise, false, {'digits': [false, productionSchedule.precision_digits]})"/>
+                </th>
+            </t>
+        </tr>
+      </t>
+      <t t-jquery="tr[name*='safety_stock']" t-operation="replace">
+        <tr name="safety_stock" t-attf-class="{{! (groups.mrp_mps_show_safety_stock or groups.mrp_mps_show_available_to_promise) and 'o_hidden' or ''}}">
+            <th scope="row">
+                = <span t-attf-class="{{! groups.mrp_mps_show_available_to_promise and 'o_hidden' or ''}}" data-toggle="tooltip" data-placement="bottom" title="Quantity predicted to be available for sale at the end of the period (= to replenish - actual demand).">ATP</span>
+                <span t-attf-class="{{! (groups.mrp_mps_show_safety_stock and groups.mrp_mps_show_available_to_promise) and 'o_hidden' or ''}}">/</span>
+                <span t-attf-class="{{! groups.mrp_mps_show_safety_stock and 'o_hidden' or ''}}" data-toggle="tooltip" data-placement="bottom" title="The forecasted quantity in stock at the end of the period.">Forecasted Stock</span>
+            </th>
+            <th class="text-right">
+                <button type="button" t-attf-class="{{! groups.mrp_mps_show_safety_stock and 'o_hidden' or 'btn btn-link text-muted o_no_padding o_mrp_mps_edit'}}">
+                    <span class="fa fa-bullseye text-muted fa-fw" role="img" aria-label="Forecasted" title="Forecasted"/>
+                    <t t-esc="productionSchedule.forecast_target_qty or 0.0"/>
+                </button>
+            </th>
+            <t t-foreach="productionSchedule.forecast_ids" t-as="forecast">
+                <th class="text-right pr-4">
+                    <span t-attf-class="{{! groups.mrp_mps_show_available_to_promise and 'o_hidden' or ''}}" t-esc="formatFloat(forecast.starting_inventory_qty + forecast.incoming_product - forecast.product_compromise_qty - forecast.product_reserve_qty - forecast.replenish_qty - forecast.outgoing_qty, false, {'digits': [false, productionSchedule.precision_digits]})"/>
+                    <!-- <span t-attf-class="{{! (groups.mrp_mps_show_safety_stock and groups.mrp_mps_show_available_to_promise) and 'o_hidden' or ''}}">/</span>
+                    <span t-attf-class="{{forecast.safety_stock_qty &lt; 0 and 'text-danger' or ''}} {{! groups.mrp_mps_show_safety_stock and 'o_hidden' or ''}}" t-esc="formatFloat(forecast.safety_stock_qty, false, {'digits': [false, productionSchedule.precision_digits]})"/> -->
+                </th>
+            </t>
+        </tr>
+      </t>
+
+
+
+      <t t-jquery="button[title*='Replenish']" t-operation="replace"/>
+      <t t-jquery="tr[name*='safety_stock']" t-operation="after">
+        <th style="background-color:#37C180"/>
+        <t t-foreach="productionSchedule.forecast_ids" t-as="forecast">
+            <th style="background-color:#37C180"/>
+        </t>
+      </t>
+
+  </t>
+
+</templates>
