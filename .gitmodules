@@ -2,3 +2,8 @@
 	path = measurement_processes_production
 	url = git@github.com:GrupoRequiez/measurement_processes_production.git
 	branch = 14.0
+
+[submodule "value_merchandise_sent"]
+	path = value_merchandise_sent
+	url = git@github.com:GrupoRequiez/value_merchandise_sent.git
+	branch = 14.0
